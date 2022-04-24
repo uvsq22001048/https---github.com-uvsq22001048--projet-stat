@@ -60,11 +60,13 @@ def moyenne(serie):
     return moyen
 
 # fonction variance
-    #def variance(serie)
-     #moyenne(serie)
+def variance(serie):
+    m = sum(moyenne(serie)) / len(moyenne(serie))
+    var = sum((c - m) ** 2 for c in moyenne(serie)) / len(moyenne(serie))
+# programme trouvé donc a vérifier
 
 # fonction covariance
-    #def covariance(serieX, serieY)
+#def covariance(serieX, serieY):
   # moyenne(serie)
 
 # fonction corrélation
@@ -88,8 +90,8 @@ canvas = tk.Canvas(racine, width=600, height=600, bg="white")
 bouton_trace = tk.Button(racine, text="tracer la droite")
 bouton_color = tk.Button(racine, text="autre couleur", command = changecolor)
 bouton_quitter = tk.Button(racine, text="quitter", command = quit)
-bouton_activer = tk.Button(racine, text="activer mode")
-bouton_desactiver = tk.Button(racine, text= "desactiver mode")
+bouton_activer = tk.Button(racine, text="activer mode dessin")
+bouton_desactiver = tk.Button(racine, text= "desactiver mode dessin")
 canvas.grid(column=1, row=0, rowspan=10)
 bouton_trace.grid(row=0)
 bouton_color.grid(row=1)
