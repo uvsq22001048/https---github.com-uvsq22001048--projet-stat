@@ -11,8 +11,11 @@ import random as rd
 from random import randrange
 #########################
 #variable
-coul ="blue"
+coul ="dark green"
 x1, y1, x2, y2 = 10, 190, 190, 10
+#variable provenant de SWINNEN_apprendre_python3_5.pdf
+# les variable x et y servent a vérifier que la fonction def changecolor marche bien
+
 
 #fonctions
 #########################
@@ -36,6 +39,8 @@ def cree_fichier_alea(nb, nomfichier):
 
 # fonction pour tracer la droite
     #def trace_droite(a, b)
+
+
 #def drawline():
  #global x1, y1, x2, y2, coul
  #canvas.create_line(x1,y1,x2,y2,width=2,fill=coul)
@@ -46,6 +51,8 @@ def changecolor():
  pal=['purple','cyan','maroon','green','red','blue','orange','yellow']
  c = randrange(8) # => génère un nombre aléatoire de 0 à 7
  coul = pal[c]
+
+ #def drawline() et def changecolor() provient de SWINNEN_apprendre_python3_5.pdf
 
 ###########################
 ###########################
@@ -63,7 +70,8 @@ def moyenne(serie):
 def variance(serie):
     m = sum(moyenne(serie)) / len(moyenne(serie))
     var = sum((c - m) ** 2 for c in moyenne(serie)) / len(moyenne(serie))
-# programme trouvé donc a vérifier
+# programme trouvé  et modifier donc a vérifier
+# il provient de https://askcodez.com/comment-puis-je-calculer-la-variance-dune-liste-en-python.html
 
 # fonction covariance
 #def covariance(serieX, serieY):
