@@ -31,7 +31,9 @@ def cree_fichier_alea(nb, nomfichier):
     fic.close()
 
 # fonction lecture de fichier
-    #def lit_fichier(nomfic)
+def lit_fichier(nomfic):
+    fic = open(nomfic,"r")
+
     
 # fonction pour faire le nuage
     #def trace_Nuage(nomf)
@@ -68,14 +70,16 @@ def moyenne(serie):
 
 # fonction variance
 def variance(serie):
-    m = sum(moyenne(serie)) / len(moyenne(serie))
-    var = sum((c - m) ** 2 for c in moyenne(serie)) / len(moyenne(serie))
+    m = moyenne(serie)
+    var = sum((c - m) ** 2 for c in serie) / len(serie)
+    return var
+
 # programme trouvé  et modifier donc a vérifier
 # il provient de https://askcodez.com/comment-puis-je-calculer-la-variance-dune-liste-en-python.html
 
 # fonction covariance
 #def covariance(serieX, serieY):
-  # moyenne(serie)
+  # moyenne()
 
 # fonction corrélation
     #def  correlation(serieX, serieY)
@@ -90,6 +94,16 @@ def variance(serie):
     #def droite_reg(serieX, serieY)
 ###########################
 
+###########################
+#mode dessin
+def clic_souris(event):
+    canvas.focus_set()
+    x = event.x
+    y = event.y
+    canvas.create_rectangle(x,y, x+5, y+5, fill = "black")
+    return
+# video: [Python] Souris avec tkinter
+
 
 # définition des widgets
 racine = tk.Tk()
@@ -100,6 +114,7 @@ bouton_color = tk.Button(racine, text="autre couleur", command = changecolor)
 bouton_quitter = tk.Button(racine, text="quitter", command = quit)
 bouton_activer = tk.Button(racine, text="activer mode dessin")
 bouton_desactiver = tk.Button(racine, text= "desactiver mode dessin")
+canvas.bind("<Button-1>", clic_souris)
 canvas.grid(column=1, row=0, rowspan=10)
 bouton_trace.grid(row=0)
 bouton_color.grid(row=1)
