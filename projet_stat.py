@@ -78,9 +78,11 @@ def variance(serie):
 # il provient de https://askcodez.com/comment-puis-je-calculer-la-variance-dune-liste-en-python.html
 
 # fonction covariance
-#def covariance(serieX, serieY):
-  # moyenne()
-
+def covariance(serieX, serieY):
+  m = moyenne()
+  covar = sum.y((c - m)** 2 for c in serieX)*sum.x((e - m)** 2 for e in serieY)/ len(serieX)+ len(serieY)
+  return covar
+#a verifier
 # fonction corrélation
     #def  correlation(serieX, serieY)
    #covariance(serieX, serieY)
