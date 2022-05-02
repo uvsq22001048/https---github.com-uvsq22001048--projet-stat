@@ -13,6 +13,8 @@ from random import randrange
 #variable
 coul ="dark green"
 x1, y1, x2, y2 = 10, 190, 190, 10
+global actif
+actif = True
 #variable provenant de SWINNEN_apprendre_python3_5.pdf
 # les variable x et y servent a vérifier que la fonction def changecolor marche bien
 
@@ -33,7 +35,10 @@ def cree_fichier_alea(nb, nomfichier):
 # fonction lecture de fichier
 def lit_fichier(nomfic):
     fic = open(nomfic,"r")
-
+    s = fic.read()
+    s.split()
+    fic.close()
+# a finir
     
 # fonction pour faire le nuage
     #def trace_Nuage(nomf)
@@ -55,6 +60,16 @@ def changecolor():
  coul = pal[c]
 
  #def drawline() et def changecolor() provient de SWINNEN_apprendre_python3_5.pdf
+#fonction dessin actif
+def dessin_actif():
+    global actif
+    actif = True  
+    print(actif)
+
+def dessin_inactif():
+    global actif
+    actif = False
+    print(actif)
 
 ###########################
 ###########################
@@ -73,24 +88,30 @@ def variance(serie):
     m = moyenne(serie)
     var = sum((c - m) ** 2 for c in serie) / len(serie)
     return var
-
-# programme trouvé  et modifier donc a vérifier
 # il provient de https://askcodez.com/comment-puis-je-calculer-la-variance-dune-liste-en-python.html
 
 # fonction covariance
 def covariance(serieX, serieY):
   m = moyenne()
-  covar = sum.y((c - m)** 2 for c in serieX)*sum.x((e - m)** 2 for e in serieY)/ len(serieX)+ len(serieY)
+  covar = (sum.y((c - m)** 2 for c in serieX))*(sum.x((e - m)** 2 for e in serieY))/ len(serieX)+ len(serieY)
   return covar
 #a verifier
+
 # fonction corrélation
-    #def  correlation(serieX, serieY)
-   #covariance(serieX, serieY)
-   #variance(serie)
+def  correlation(serieX, serieY):
+    r = covariance(serieX, serieY) / pow(variance(serieX)* variance(serieY))
+    return r
+
 
 # fonction forte corrélation
-    #def forteCorrelation(serieX, serieY)
-   #correlation()
+def forteCorrelation(serieX, serieY):
+    r = correlation(serieX, serieY)
+    if (r >= 0.8) or (r <= -0.8):
+        return True
+    else:
+        return False  
+
+
 
 # fonction calcul coefficient
     #def droite_reg(serieX, serieY)
@@ -98,12 +119,32 @@ def covariance(serieX, serieY):
 
 ###########################
 #mode dessin
+#fonction dessin actif
+def dessin_actif():
+    global actif
+    actif = True  
+    print(actif)
+
+def dessin_inactif():
+    global actif
+    actif = False
+    print(actif)
+
+#fontion clic de la souris
 def clic_souris(event):
-    canvas.focus_set()
-    x = event.x
-    y = event.y
-    canvas.create_rectangle(x,y, x+5, y+5, fill = "black")
-    return
+    global actif
+    if actif == True:
+        canvas.focus_set()
+        x = event.x
+        y = event.y
+        canvas.create_rectangle(x,y, x+5, y+5, fill = "black")
+        print(actif)
+        #return (x ,y )
+    else:
+        print(actif)
+
+
+
 # video: [Python] Souris avec tkinter
 
 
@@ -114,9 +155,10 @@ canvas = tk.Canvas(racine, width=600, height=600, bg="white")
 bouton_trace = tk.Button(racine, text="tracer la droite")
 bouton_color = tk.Button(racine, text="autre couleur", command = changecolor)
 bouton_quitter = tk.Button(racine, text="quitter", command = quit)
-bouton_activer = tk.Button(racine, text="activer mode dessin")
-bouton_desactiver = tk.Button(racine, text= "desactiver mode dessin")
-canvas.bind("<Button-1>", clic_souris)
+bouton_activer = tk.Button(racine, text="activer mode dessin", command = dessin_actif)
+bouton_desactiver = tk.Button(racine, text= "desactiver mode dessin", command = dessin_inactif)
+if actif == True:
+    canvas.bind("<Button-1>", clic_souris)
 canvas.grid(column=1, row=0, rowspan=10)
 bouton_trace.grid(row=0)
 bouton_color.grid(row=1)
