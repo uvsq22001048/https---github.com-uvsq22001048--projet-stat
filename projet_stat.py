@@ -60,16 +60,7 @@ def changecolor():
  coul = pal[c]
 
  #def drawline() et def changecolor() provient de SWINNEN_apprendre_python3_5.pdf
-#fonction dessin actif
-def dessin_actif():
-    global actif
-    actif = True  
-    print(actif)
 
-def dessin_inactif():
-    global actif
-    actif = False
-    print(actif)
 
 ###########################
 ###########################
@@ -82,6 +73,7 @@ def moyenne(serie):
         somme = somme + x
     moyen = somme / len(serie)
     return moyen
+
 
 # fonction variance
 def variance(serie):
@@ -114,7 +106,10 @@ def forteCorrelation(serieX, serieY):
 
 
 # fonction calcul coefficient
-    #def droite_reg(serieX, serieY)
+def droite_reg(serieX, serieY):
+    coeff_dir = covariance(serieX, serieY) / variance(serieX)
+    ord_orig =  moyenne(serieY) - coeff_dir * moyenne(serieX)
+    return(coeff_dir, ord_orig)
 ###########################
 
 ###########################
@@ -139,7 +134,9 @@ def clic_souris(event):
         y = event.y
         canvas.create_rectangle(x,y, x+5, y+5, fill = "black")
         print(actif)
-        #return (x ,y )
+        lserieX = [x]
+        lserieY = [y]
+        print(lserieX , lserieY)
     else:
         print(actif)
 
@@ -152,7 +149,7 @@ def clic_souris(event):
 racine = tk.Tk()
 racine.title("fenetre stat")
 canvas = tk.Canvas(racine, width=600, height=600, bg="white")
-bouton_trace = tk.Button(racine, text="tracer la droite")
+bouton_trace = tk.Button(racine, text="tracer la droite", command = droite_reg)
 bouton_color = tk.Button(racine, text="autre couleur", command = changecolor)
 bouton_quitter = tk.Button(racine, text="quitter", command = quit)
 bouton_activer = tk.Button(racine, text="activer mode dessin", command = dessin_actif)
