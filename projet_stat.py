@@ -6,7 +6,6 @@
 ##############
 
 #import des librairies 
-from sre_constants import SRE_INFO_PREFIX
 import tkinter as tk
 import random as rd
 from random import randrange
