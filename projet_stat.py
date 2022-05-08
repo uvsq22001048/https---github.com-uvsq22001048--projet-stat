@@ -6,6 +6,7 @@
 ##############
 
 #import des librairies 
+from sre_constants import SRE_INFO_PREFIX
 import tkinter as tk
 import random as rd
 from random import randrange
@@ -37,15 +38,55 @@ def lit_fichier(nomfic):
     fic = open(nomfic,"r")
     s = fic.read()
     s.split()
+
+    listeX = []
+    listeY = []
+    print(s)
+    s = float(s)
+
+    for i in range(len(s)):
+        if(s[i]%2 == 0):
+            listeX.append(str(s[i]))
+        if(s[i]%2 == 1):
+            listeY.append(str(s[i]))
+    
+    coord = [listeX,listeY]
+    
     fic.close()
-# a finir
+    return coord
+
     
 # fonction pour faire le nuage
-    #def trace_Nuage(nomf)
-     #lit_fichier()
+def trace_Nuage(nomf):
+    coord = lit_fichier(nomf)
+    fic = open("points.txt","w")
+    nbpoints = len(float(coord[0]))
+
+    fic.close()
+
 
 # fonction pour tracer la droite
-    #def trace_droite(a, b)
+def trace_droite(a, b):
+
+    fic = open("points.txt","w")
+    coord = lit_fichier(fic)
+
+    x = []
+    coord = float(coord)
+    for i in range(coord[0]):
+        x.append(coord[i])
+    
+    
+
+    x0 = int(x[0])
+    y0 = a*x0 + b
+
+    x1 = int(x[-1])
+    y1 = a*x1 + b
+
+    
+    canvas.create_line(x0, y0, x1, y1, fill=coul, width=2)
+    fic.close()
 
 
 #def drawline():
@@ -61,6 +102,8 @@ def changecolor():
 
  #def drawline() et def changecolor() provient de SWINNEN_apprendre_python3_5.pdf
 
+#mes_coord = lit_fichier("exemple.txt")
+#print(mes_coord)
 
 ###########################
 ###########################
@@ -136,7 +179,9 @@ def clic_souris(event):
         print(actif)
         lserieX = [x]
         lserieY = [y]
+        points.write(str(x) + "  " + str(y) + "\n")
         print(lserieX , lserieY)
+
     else:
         print(actif)
 
@@ -149,13 +194,14 @@ def clic_souris(event):
 racine = tk.Tk()
 racine.title("fenetre stat")
 canvas = tk.Canvas(racine, width=600, height=600, bg="white")
-bouton_trace = tk.Button(racine, text="tracer la droite", command = droite_reg)
+bouton_trace = tk.Button(racine, text="tracer la droite", command = trace_droite )
 bouton_color = tk.Button(racine, text="autre couleur", command = changecolor)
 bouton_quitter = tk.Button(racine, text="quitter", command = quit)
 bouton_activer = tk.Button(racine, text="activer mode dessin", command = dessin_actif)
 bouton_desactiver = tk.Button(racine, text= "desactiver mode dessin", command = dessin_inactif)
 if actif == True:
     canvas.bind("<Button-1>", clic_souris)
+points = open("points.txt","w")
 canvas.grid(column=1, row=0, rowspan=10)
 bouton_trace.grid(row=0)
 bouton_color.grid(row=1)
